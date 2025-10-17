@@ -48,5 +48,3 @@ variable "egress_from_port" {
 variable "protocol" {
     default = "-1"
 }
-
-condition ? true_val : false_val

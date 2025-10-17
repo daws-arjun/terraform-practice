@@ -1,3 +1,13 @@
 Terraform:
 =========
-Creating EC2 instance
+Creating EC2 instance using subnet and sg
+
+Requirements:
+1. providers.tf file: Here we mention which cloud we want to create infra.
+2. Already created this file.
+3. Created one ec2-subnet-sg.tf
+
+
+4. Created var file: inclided ami_id, subnet_id, sg_id
+
+
