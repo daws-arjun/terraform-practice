@@ -7,34 +7,16 @@ resource "aws_security_group" "roboshop-instance" {
     protocol         = "-1" # -1 means all protocols
     cidr_blocks      = ["0.0.0.0/0"] # internet
   }
-
-  ingress {
-    from_port        = 22
-    to_port          = 22
-    protocol         = "-1" # -1 means all protocols
-    cidr_blocks      = ["0.0.0.0/0"] # internet
+# block
+  dynamic "ingress" {
+    for_each = toset(var.ingress_ports)
+    content{
+        from_port        = ingress.value
+        to_port          = ingress.value
+        protocol         = "tcp"
+        cidr_blocks      = ["0.0.0.0/0"] # internet
+    }
   }
-
-  ingress {
-    from_port        = 80
-    to_port          = 80
-    protocol         = "-1" # -1 means all protocols
-    cidr_blocks      = ["0.0.0.0/0"] # internet
-  }
-
-  ingress {
-    from_port        = 8080
-    to_port          = 8080
-    protocol         = "-1" # -1 means all protocols
-    cidr_blocks      = ["0.0.0.0/0"] # internet
-  }
-
-  ingress {
-    from_port        = 3306
-    to_port          = 3306
-    protocol         = "-1" # -1 means all protocols
-    cidr_blocks      = ["0.0.0.0/0"] # internet
-  }  
 
   tags = {
     Name = "roboshop-strict-sg"
